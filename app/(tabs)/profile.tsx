@@ -80,7 +80,7 @@ export default function ProfileScreen() {
   const handleLogout = async () => {
     try {
       await logoutMutation();
-      router.replace('/onboarding');
+      router.replace('/auth');
     } catch (e) {
       console.error('Failed to logout:', e);
     }

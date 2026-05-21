@@ -1,13 +1,17 @@
 import "../global.css";
-import { useFonts, PlayfairDisplay_400Regular, PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display';
-import { Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
+import {
+  useFonts,
+  PlayfairDisplay_400Regular,
+  PlayfairDisplay_700Bold,
+} from "@expo-google-fonts/playfair-display";
+import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { UserProvider } from '../hooks/useUserContext';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import { UserProvider } from "../hooks/useUserContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Initialize React Query client
 const queryClient = new QueryClient({
@@ -45,15 +49,23 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <UserProvider>
           <StatusBar style="dark" />
-          <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#F5F1E9' } }}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: "#F5F1E9" },
+            }}
+          >
             <Stack.Screen name="index" />
+            <Stack.Screen name="auth" />
             <Stack.Screen name="onboarding" />
             <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="intercept" options={{ presentation: 'fullScreenModal' }} />
+            <Stack.Screen
+              name="intercept"
+              options={{ presentation: "fullScreenModal" }}
+            />
           </Stack>
         </UserProvider>
       </SafeAreaProvider>
     </QueryClientProvider>
   );
 }
-

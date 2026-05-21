@@ -70,6 +70,17 @@ export function UserProvider({ children }: { children: ReactNode }) {
     await authService.saveSession(newToken, newUser);
     setToken(newToken);
     setUser(newUser);
+    // Sync local onboarding fields with the user data
+    setUserData((prev) => ({
+      ...prev,
+      name: newUser.name || prev.name,
+      age: newUser.ageRange || prev.age,
+      apps: newUser.blockedApps?.map((a) => a.appName) || prev.apps,
+      goals: newUser.improvementGoals || prev.goals,
+      triggers: newUser.triggers || prev.triggers,
+      commitment: newUser.commitmentLevel || prev.commitment,
+      mode: newUser.mode || prev.mode,
+    }));
   };
 
   const clearAuth = async () => {
@@ -88,6 +99,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       age: newUser.ageRange || prev.age,
       apps: newUser.blockedApps?.map((a) => a.appName) || prev.apps,
       goals: newUser.improvementGoals || prev.goals,
+      triggers: newUser.triggers || prev.triggers,
       commitment: newUser.commitmentLevel || prev.commitment,
       mode: newUser.mode || prev.mode,
     }));
